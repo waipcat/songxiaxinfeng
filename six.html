@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>六恒系统 | 松下新风产品中心</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <img src="assets/images/Panasonic_logo.jpg" alt="Panasonic" class="brand-logo" />
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="products.html">产品</a>
+        <a href="compare.html">对比</a>
+        <a href="selector.html">选型</a>
+        <a href="six.html">6恒系统</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="section">
+        <div class="six-grid">
+          <article class="six-visual">
+            <div class="comfort-core">6</div>
+            <span style="--x: 50%; --y: 8%">恒温</span>
+            <span style="--x: 82%; --y: 28%">恒湿</span>
+            <span style="--x: 76%; --y: 72%">恒氧</span>
+            <span style="--x: 50%; --y: 92%">恒净</span>
+            <span style="--x: 18%; --y: 72%">恒静</span>
+            <span style="--x: 18%; --y: 28%">恒智</span>
+          </article>
+          <article class="six-copy">
+            <h3>空调、新风与调湿的组合式展示</h3>
+            <p>
+              这一页后续可以放系统原理图、户型案例、设备清单、控制逻辑和调试要点。草稿中先保留清晰的信息架构。
+            </p>
+            <div class="six-stats">
+              <span><strong>30-300</strong> m²</span>
+              <span><strong>4</strong> 类场景</span>
+              <span><strong>1</strong> 套舒适系统</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-muted tools-layout">
+        <form id="sixForm" class="tool-panel">
+          <label>
+            服务面积
+            <span><input name="area" type="number" min="30" max="500" value="160" /> m²</span>
+          </label>
+          <label>
+            房间数量
+            <span><input name="rooms" type="number" min="1" max="12" value="4" /> 间</span>
+          </label>
+          <label>
+            舒适优先级
+            <select name="priority">
+              <option value="balanced">均衡舒适</option>
+              <option value="humidity">湿度控制优先</option>
+              <option value="quiet">静音优先</option>
+            </select>
+          </label>
+        </form>
+        <aside id="sixResult" class="result-panel"></aside>
+      </section>
+    </main>
+
+    <footer class="footer"><span>Panasonic 新风产品中心草稿</span><span>六恒系统</span></footer>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

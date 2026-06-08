@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>选型工具 | 松下新风产品中心</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <img src="assets/images/Panasonic_logo.jpg" alt="Panasonic" class="brand-logo" />
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="products.html">产品</a>
+        <a href="compare.html">对比</a>
+        <a href="selector.html">选型</a>
+        <a href="six.html">六恒系统</a>
+      </nav>
+    </header>
+
+    <main>
+    <div class="selx-hub" id="selxHub">
+      <div class="selx-hub-heading">
+        <h2>选型工具</h2>
+        <p>请选择需要使用的选型模块</p>
+      </div>
+      <div class="selx-hub-grid">
+        <button class="selx-hub-card" data-target="freshAir">
+          <div class="selx-hub-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+          </div>
+          <div class="selx-hub-info">
+            <h3>新风选型</h3>
+            <p>全热交换新风机选型，支持简易与标准两种模式</p>
+          </div>
+          <span class="selx-hub-arrow">→</span>
+        </button>
+        <button class="selx-hub-card" data-target="airConditioner">
+          <div class="selx-hub-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="8" rx="2"/><path d="M6 14v2m12-2v2M7 10h10"/><circle cx="17" cy="10" r="1"/></svg>
+          </div>
+          <div class="selx-hub-info">
+            <h3>空调选型</h3>
+            <p>6恒系统空调模块选型，内机外机智能匹配</p>
+          </div>
+          <span class="selx-hub-arrow">→</span>
+        </button>
+        <button class="selx-hub-card" data-target="sixGen2">
+          <div class="selx-hub-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+          </div>
+          <div class="selx-hub-info">
+            <h3>6恒2代选型</h3>
+            <p>6恒气候站2代系统选型工具</p>
+          </div>
+          <span class="selx-hub-badge">即将推出</span>
+        </button>
+        <button class="selx-hub-card" data-target="sixSmart">
+          <div class="selx-hub-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6m-4-3v3m2-3v3"/></svg>
+          </div>
+          <div class="selx-hub-info">
+            <h3>6恒智选选型</h3>
+            <p>6恒气候站智选系统选型工具</p>
+          </div>
+          <span class="selx-hub-badge">即将推出</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="selx-module" id="mod-freshAir" style="display:none">
+      <button class="selx-back-btn" data-back>← 返回选型导航</button>
+      <section class="section">
+        <div class="selx-heading">
+          <h2>新风选型工具</h2>
+        </div>
+
+        <div class="selx-card selx-card-compact selx-full-width">
+          <div class="selx-mode" id="selxMode">
+            <button class="mode-btn active" data-mode="simple">简易选型</button>
+            <button class="mode-btn" data-mode="standard">标准选型</button>
+          </div>
+        </div>
+
+        <div class="selx-layout">
+
+          <div class="selx-form">
+
+            <div class="selx-card selx-card-compact">
+              <div class="selx-features-label">产品功能</div>
+              <div class="selx-features" id="selxFeatures">
+                <label class="feat-btn" data-series="zjd3c">
+                  <input type="radio" name="feature" value="zoning" />
+                  <span class="feat-label">分区控制</span>
+                </label>
+                <label class="feat-btn" data-series="zdp2c">
+                  <input type="radio" name="feature" value="disinfection" />
+                  <span class="feat-label">空气消毒</span>
+                </label>
+                <label class="feat-btn" data-series="zm2c">
+                  <input type="radio" name="feature" value="compact" />
+                  <span class="feat-label">小巧体积</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="selx-card selx-card-compact" id="selxSimple">
+              <div class="selx-two-col">
+                <div class="selx-col-block">
+                  <div class="selx-block-title">房屋信息</div>
+                  <div class="selx-block-content">
+                    <div class="selx-field">
+                      <label>建筑面积</label>
+                      <div class="inp-unit">
+                        <input id="simpArea" type="number" min="20" max="1000" value="120" />
+                        <span class="inp-u">m²</span>
+                      </div>
+                    </div>
+                    <div class="selx-field">
+                      <label>层高</label>
+                      <div class="inp-unit">
+                        <input id="simpHeight" type="number" min="2.2" max="6" step="0.1" value="2.7" />
+                        <span class="inp-u">m</span>
+                      </div>
+                    </div>
+                    <div class="selx-field">
+                      <label>新风面积比例</label>
+                      <div class="inp-unit">
+                        <input id="simpAreaRatio" type="number" min="30" max="100" value="70" />
+                        <span class="inp-u">%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="selx-col-block">
+                  <div class="selx-block-title">换气次数</div>
+                  <div class="selx-block-content">
+                    <div class="selx-achs" id="selxAchs">
+                      <label class="ach-card">
+                        <input type="radio" name="simpAch" value="0.7" />
+                        <span class="ach-v">0.7</span>
+                        <span class="ach-d">标准</span>
+                      </label>
+                      <label class="ach-card">
+                        <input type="radio" name="simpAch" value="1.0" checked />
+                        <span class="ach-v">1.0</span>
+                        <span class="ach-d">加强</span>
+                      </label>
+                      <label class="ach-card ach-custom">
+                        <input type="radio" name="simpAch" value="custom" />
+                        <input type="text" id="simpAchCustom" class="ach-custom-input" placeholder="自定义" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="selx-card selx-card-compact" id="selxStandard" style="display:none">
+              <div class="selx-block-title">房间列表</div>
+              <table class="fresh-room-table">
+                <thead>
+                  <tr>
+                    <th style="width:100px">房间名称</th>
+                    <th style="width:80px">面积<br>(m²)</th>
+                    <th style="width:80px">层高<br>(m)</th>
+                    <th style="width:90px">换气次数<br>(次/h)</th>
+                    <th style="width:70px">活动人数<br>(人)</th>
+                    <th style="width:100px">人均新风量<br>(m³/h·人)</th>
+                    <th style="width:80px">按面积<br>(m³/h)</th>
+                    <th style="width:80px">按人数<br>(m³/h)</th>
+                    <th style="width:90px">计算风量<br>(m³/h)</th>
+                    <th style="width:42px">操作</th>
+                  </tr>
+                </thead>
+                <tbody id="freshRoomTableBody">
+                </tbody>
+                <tfoot id="freshRoomTableFoot">
+                </tfoot>
+              </table>
+              <button type="button" class="button secondary room-add" id="roomAddBtn">+ 添加房间</button>
+            </div>
+
+          </div>
+
+          <div class="selx-result" id="selxResult">
+            <div class="selx-result-h">
+              <h3>选型结果</h3>
+            </div>
+            <div class="selx-result-b">
+              <div class="selx-device" id="selxDevice"></div>
+              <div class="selx-airflow">
+                <span class="selx-rl">建议新风量</span>
+                <span class="selx-rv" id="selxAirflow">—</span>
+              </div>
+              <div class="selx-reason" id="selxReason"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <div class="selx-module" id="mod-airConditioner" style="display:none">
+      <button class="selx-back-btn" data-back>← 返回选型导航</button>
+      <section class="section">
+        <div class="selx-heading">
+          <h2>6恒系统选型 - 空调模块</h2>
+          <p>松下6恒系统由空调模块、地暖模块和新风模块组成，以下为空调选型工具</p>
+        </div>
+
+        <div class="selx-card selx-card-compact">
+          <div class="selx-row">
+            <div class="selx-field">
+              <label>内机系列</label>
+              <select id="acIndoorSeries">
+                <option value="暗藏管道式_超薄_100×nanoe">暗藏管道式_超薄_100×nanoe</option>
+                <option value="暗藏管道式_超薄_100×nanoe_内置排水泵">暗藏管道式_超薄_100×nanoe_内置排水泵</option>
+                <option value="暗藏管道式_超薄_100×nanoe_内置排水泵_PM2.5滤网">暗藏管道式_超薄_100×nanoe_内置排水泵_PM2.5滤网</option>
+                <option value="暗藏管道式_超薄_100×nanoe_PM2.5滤网">暗藏管道式_超薄_100×nanoe_PM2.5滤网</option>
+                <option value="厨卫专用空调">厨卫专用空调</option>
+                <option value="暗藏管道式_中静压_nanoe_内置排水泵">暗藏管道式_中静压_nanoe_内置排水泵</option>
+                <option value="暗藏管道式_中静压_内置排水泵">暗藏管道式_中静压_内置排水泵</option>
+                <option value="暗藏管道式_中静压">暗藏管道式_中静压</option>
+              </select>
+            </div>
+            <div class="selx-field">
+              <label>外机系列</label>
+              <select id="acOutdoorSeries">
+                <option value="S7">变频多联室外机_侧出风S7</option>
+                <option value="S7R">变频多联室外机_侧出风S7R</option>
+                <option value="S7J">变频多联室外机_侧出风S7J</option>
+                <option value="S7RJ">变频多联室外机_侧出风S7RJ</option>
+                <option value="S7P">变频多联室外机_侧出风S7P</option>
+                <option value="8H">家用多联G系列_8H</option>
+              </select>
+            </div>
+            <div class="selx-field">
+              <label>超配率</label>
+              <div class="inp-unit">
+                <input id="acOverRatio" type="number" min="1.0" max="1.5" step="0.05" value="1.2" />
+                <span class="inp-u">倍</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="selx-card selx-card-compact">
+          <div class="selx-block-title">房间列表</div>
+          <table class="ac-room-table">
+            <thead>
+              <tr>
+                <th style="width:50px">楼层</th>
+                <th style="width:60px">房间名称</th>
+                <th style="width:45px">面积<br>(m²)</th>
+                <th style="width:50px">冷负荷<br>(W/m²)</th>
+                <th style="width:55px">所需冷量<br>(kW)</th>
+                <th style="width:180px">内机系列</th>
+                <th style="width:160px">选配型号</th>
+                <th style="width:38px">台数</th>
+                <th style="width:58px">设备制冷量<br>(kW)</th>
+                <th style="width:58px">单位面积<br>冷量(W/m²)</th>
+                <th style="width:42px">系统<br>编号</th>
+                <th style="width:160px">室外机型号</th>
+                <th style="width:58px">外机<br>制冷量(kW)</th>
+                <th style="width:42px">操作</th>
+              </tr>
+            </thead>
+            <tbody id="acRoomTableBody">
+            </tbody>
+            <tfoot id="acTableFoot">
+            </tfoot>
+          </table>
+          <button type="button" class="button secondary room-add" id="acAddRoomBtn">+ 添加房间</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="selx-module" id="mod-sixGen2" style="display:none">
+      <button class="selx-back-btn" data-back>← 返回选型导航</button>
+      <section class="section">
+        <div class="selx-heading">
+          <h2>6恒2代选型</h2>
+          <p>6恒气候站2代系统选型工具</p>
+        </div>
+        <div class="selx-placeholder">
+          <div class="selx-placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+          </div>
+          <h3>功能开发中</h3>
+          <p>6恒2代选型工具正在紧锣密鼓地开发中，敬请期待！</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="selx-module" id="mod-sixSmart" style="display:none">
+      <button class="selx-back-btn" data-back>← 返回选型导航</button>
+      <section class="section">
+        <div class="selx-heading">
+          <h2>6恒智选选型</h2>
+          <p>6恒气候站智选系统选型工具</p>
+        </div>
+
+        <div class="selx-tabs" id="sixSmartTabs">
+          <button class="selx-tab active" data-tab="fresh">新风选型</button>
+          <button class="selx-tab" data-tab="ac">空调选型</button>
+          <button class="selx-tab" data-tab="floorHeat">地暖选型</button>
+          <button class="selx-tab" data-tab="summary">设备汇总</button>
+        </div>
+
+        <div class="selx-tab-content" id="tab-fresh">
+          <div class="selx-card selx-card-compact">
+            <div class="selx-block-title">房间列表</div>
+            <div style="overflow-x:auto">
+              <table class="fresh-room-table smart-room-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px">楼层</th>
+                    <th style="width:60px">系统<br>编号</th>
+                    <th style="width:100px">房间名称</th>
+                    <th style="width:70px">面积<br>(m²)</th>
+                    <th style="width:60px">层高<br>(m)</th>
+                    <th style="width:70px">换气次数<br>(次/h)</th>
+                    <th style="width:80px">计算风量<br>(m³/h)</th>
+                    <th style="width:60px">风口数量</th>
+                    <th style="width:80px">设计总风量<br>(m³/h)</th>
+                    <th style="width:42px">操作</th>
+                  </tr>
+                </thead>
+                <tbody id="smartFreshBody">
+                </tbody>
+                <tfoot id="smartFreshFoot"></tfoot>
+              </table>
+            </div>
+            <button type="button" class="button secondary room-add" id="smartFreshAddBtn">+ 添加房间</button>
+          </div>
+
+          <div class="selx-card selx-card-compact" id="smartFreshEquipCard" style="display:none">
+            <div class="selx-block-title">系统设备选型</div>
+            <div style="overflow-x:auto">
+              <table class="fresh-room-table smart-equip-table" id="smartFreshEquipTable">
+                <thead>
+                  <tr>
+                      <th style="width:70px">系统<br>编号</th>
+                      <th style="width:80px">调湿类型</th>
+                      <th style="width:180px">推荐新风机</th>
+                      <th style="width:150px">加湿模块<br>（选配）</th>
+                      <th style="width:150px">御风箱<br>（选配）</th>
+                      <th style="width:150px">御风组件<br>（选配）</th>
+                    </tr>
+                </thead>
+                <tbody id="smartFreshEquipBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="selx-tab-content" id="tab-ac" style="display:none">
+          <div class="selx-card selx-card-compact">
+            <div class="selx-row">
+              <div class="selx-field">
+                <label>内机系列</label>
+                <select id="sixAcIndoorSeries">
+                  <option value="暗藏管道式_超薄_100×nanoe">暗藏管道式_超薄_100×nanoe</option>
+                  <option value="暗藏管道式_超薄_100×nanoe_内置排水泵">暗藏管道式_超薄_100×nanoe_内置排水泵</option>
+                  <option value="暗藏管道式_超薄_100×nanoe_内置排水泵_PM2.5滤网">暗藏管道式_超薄_100×nanoe_内置排水泵_PM2.5滤网</option>
+                  <option value="暗藏管道式_超薄_100×nanoe_PM2.5滤网">暗藏管道式_超薄_100×nanoe_PM2.5滤网</option>
+                  <option value="厨卫专用空调">厨卫专用空调</option>
+                  <option value="暗藏管道式_中静压_nanoe_内置排水泵">暗藏管道式_中静压_nanoe_内置排水泵</option>
+                  <option value="暗藏管道式_中静压_内置排水泵">暗藏管道式_中静压_内置排水泵</option>
+                  <option value="暗藏管道式_中静压">暗藏管道式_中静压</option>
+                </select>
+              </div>
+              <div class="selx-field">
+                <label>外机系列</label>
+                <select id="sixAcOutdoorSeries">
+                  <option value="S7">变频多联室外机_侧出风S7</option>
+                  <option value="S7R">变频多联室外机_侧出风S7R</option>
+                  <option value="S7J">变频多联室外机_侧出风S7J</option>
+                  <option value="S7RJ">变频多联室外机_侧出风S7RJ</option>
+                  <option value="S7P">变频多联室外机_侧出风S7P</option>
+                  <option value="8H">家用多联G系列_8H</option>
+                </select>
+              </div>
+              <div class="selx-field">
+                <label>超配率</label>
+                <div class="inp-unit">
+                  <input id="sixAcOverRatio" type="number" min="1.0" max="1.5" step="0.05" value="1.2" />
+                  <span class="inp-u">倍</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="selx-card selx-card-compact">
+            <div class="selx-block-title">房间列表</div>
+            <table class="ac-room-table">
+              <thead>
+                <tr>
+                  <th style="width:50px">楼层</th>
+                  <th style="width:60px">房间名称</th>
+                  <th style="width:45px">面积<br>(m²)</th>
+                  <th style="width:50px">冷负荷<br>(W/m²)</th>
+                  <th style="width:55px">所需冷量<br>(kW)</th>
+                  <th style="width:180px">内机系列</th>
+                  <th style="width:160px">选配型号</th>
+                  <th style="width:38px">台数</th>
+                  <th style="width:58px">设备制冷量<br>(kW)</th>
+                  <th style="width:58px">单位面积<br>冷量(W/m²)</th>
+                  <th style="width:42px">系统<br>编号</th>
+                  <th style="width:160px">室外机型号</th>
+                  <th style="width:58px">外机<br>制冷量(kW)</th>
+                  <th style="width:42px">操作</th>
+                </tr>
+              </thead>
+              <tbody id="sixAcRoomTableBody"></tbody>
+              <tfoot id="sixAcTableFoot"></tfoot>
+            </table>
+            <button type="button" class="button secondary room-add" id="sixAcAddRoomBtn">+ 添加房间</button>
+          </div>
+        </div>
+
+        <div class="selx-tab-content" id="tab-floorHeat" style="display:none">
+          <div class="selx-card selx-card-compact">
+            <label class="selx-switch-label">
+              <input type="checkbox" id="smartFHEnable" checked />
+              <span class="selx-switch"></span>
+              <span>启用地暖模块</span>
+            </label>
+          </div>
+
+          <div id="smartFHContent">
+            <div class="selx-card selx-card-compact">
+              <div class="selx-block-title">地暖负荷计算</div>
+              <div style="overflow-x:auto">
+                <table class="fresh-room-table fh-room-table">
+                  <thead>
+                    <tr>
+                      <th style="width:50px">楼层</th>
+                      <th style="width:80px">房间名称</th>
+                      <th style="width:60px">面积<br>(m²)</th>
+                      <th style="width:80px">单位面积<br>制热量(W/m²)</th>
+                      <th style="width:70px">所需制热量<br>(kW)</th>
+                      <th style="width:42px">系统<br>编号</th>
+                      <th style="width:180px">A2W水力模块</th>
+                      <th style="width:70px">设备制热量<br>(kW)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="smartFHBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="selx-tab-content" id="tab-summary" style="display:none">
+          <div class="selx-card selx-card-compact">
+            <div class="selx-block-title">设备汇总</div>
+            <div style="overflow-x:auto">
+              <table class="fresh-room-table summary-table" id="sumAllTable">
+                <thead>
+                  <tr>
+                    <th style="width:110px">大类</th>
+                    <th>设备类型</th>
+                    <th>型号</th>
+                    <th style="width:90px">数量</th>
+                  </tr>
+                </thead>
+                <tbody id="sumAllBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+    <div id="productModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-button" type="button" data-close aria-label="关闭">×</button>
+        <div id="modalContent"></div>
+      </article>
+    </div>
+
+    <footer class="footer"><span>Panasonic 新风产品中心草稿</span><span>选型工具</span></footer>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>产品展示 | 松下新风产品中心</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <img src="assets/images/Panasonic_logo.jpg" alt="Panasonic" class="brand-logo" />
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="products.html">产品</a>
+        <a href="compare.html">对比</a>
+        <a href="selector.html">选型</a>
+        <a href="six.html">6恒系统</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Product Categories</p>
+          <h2>产品系列</h2>
+        </div>
+        
+        <div id="productGrid" class="product-grid"></div>
+      </section>
+    </main>
+
+    <div id="productModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-button" type="button" data-close aria-label="关闭">×</button>
+        <div id="modalContent"></div>
+      </article>
+    </div>
+
+    <footer class="footer"><span>Panasonic 新风产品中心草稿</span><span>产品展示</span></footer>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
