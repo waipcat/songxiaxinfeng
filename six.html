@@ -5,6 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>六恒系统 | 松下新风产品中心</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      .tab-container {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 20px;
+        background: #F1F5F9;
+        border-bottom: 1px solid #E2E8F0;
+      }
+
+      .tab-btn {
+        padding: 12px 28px;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: white;
+        color: #475569;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .tab-btn.active {
+        background: #0F172A;
+        color: white;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+      }
+
+      .tab-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .six-product-section {
+        margin: 0;
+        padding: 0;
+      }
+
+      .six-product-title {
+        text-align: center;
+        padding: 32px 24px;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        color: white;
+      }
+
+      .six-product-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .six-product-title p {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+
+      .six-images-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .six-images-grid img {
+        width: 100%;
+        max-width: 1000px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .placeholder-content {
+        text-align: center;
+        padding: 80px 24px;
+        background: #F8FAFC;
+      }
+
+      .placeholder-content h3 {
+        font-size: 24px;
+        color: #475569;
+        margin-bottom: 16px;
+      }
+
+      .placeholder-content p {
+        font-size: 16px;
+        color: #94A3B8;
+      }
+    </style>
   </head>
   <body>
     <header class="topbar">
@@ -12,6 +109,7 @@
         <img src="assets/images/Panasonic_logo.jpg" alt="Panasonic" class="brand-logo" />
       </a>
       <nav class="nav" aria-label="主导航">
+        <a href="index.html">主页</a>
         <a href="products.html">产品</a>
         <a href="compare.html">对比</a>
         <a href="selector.html">选型</a>
@@ -20,56 +118,53 @@
     </header>
 
     <main>
+      <div class="tab-container">
+        <button class="tab-btn" id="tab-2gen">6恒2代</button>
+        <button class="tab-btn active" id="tab-smart">6恒智选</button>
+      </div>
 
-      <section class="section">
-        <div class="six-grid">
-          <article class="six-visual">
-            <div class="comfort-core">6</div>
-            <span style="--x: 50%; --y: 8%">恒温</span>
-            <span style="--x: 82%; --y: 28%">恒湿</span>
-            <span style="--x: 76%; --y: 72%">恒氧</span>
-            <span style="--x: 50%; --y: 92%">恒净</span>
-            <span style="--x: 18%; --y: 72%">恒静</span>
-            <span style="--x: 18%; --y: 28%">恒智</span>
-          </article>
-          <article class="six-copy">
-            <h3>空调、新风与调湿的组合式展示</h3>
-            <p>
-              这一页后续可以放系统原理图、户型案例、设备清单、控制逻辑和调试要点。草稿中先保留清晰的信息架构。
-            </p>
-            <div class="six-stats">
-              <span><strong>30-300</strong> m²</span>
-              <span><strong>4</strong> 类场景</span>
-              <span><strong>1</strong> 套舒适系统</span>
-            </div>
-          </article>
+      <div class="tab-content" id="content-2gen">
+        <div class="six-product-section">
+          <div class="six-images-grid">
+            <img src="sources/2-1.jpg" alt="6恒2代产品图1" />
+            <img src="sources/2-2.jpg" alt="6恒2代产品图2" />
+            <img src="sources/2-3.jpg" alt="6恒2代产品图3" />
+            <img src="sources/2-4.jpg" alt="6恒2代产品图4" />
+            <img src="sources/2-5.jpg" alt="6恒2代产品图5" />
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section section-muted tools-layout">
-        <form id="sixForm" class="tool-panel">
-          <label>
-            服务面积
-            <span><input name="area" type="number" min="30" max="500" value="160" /> m²</span>
-          </label>
-          <label>
-            房间数量
-            <span><input name="rooms" type="number" min="1" max="12" value="4" /> 间</span>
-          </label>
-          <label>
-            舒适优先级
-            <select name="priority">
-              <option value="balanced">均衡舒适</option>
-              <option value="humidity">湿度控制优先</option>
-              <option value="quiet">静音优先</option>
-            </select>
-          </label>
-        </form>
-        <aside id="sixResult" class="result-panel"></aside>
-      </section>
+      <div class="tab-content active" id="content-smart">
+        <div class="six-product-section">
+          <div class="six-images-grid">
+            <img src="sources/1.jpg" alt="6恒智选产品图1" />
+            <img src="sources/2.jpg" alt="6恒智选产品图2" />
+            <img src="sources/3.jpg" alt="6恒智选产品图3" />
+            <img src="sources/4.jpg" alt="6恒智选产品图4" />
+            <img src="sources/5.jpg" alt="6恒智选产品图5" />
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="footer"><span>Panasonic 新风产品中心草稿</span><span>六恒系统</span></footer>
-    <script src="assets/app.js"></script>
+    
+    <script>
+      const tabs = document.querySelectorAll('.tab-btn');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.id.replace('tab-', 'content-');
+          
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          
+          tab.classList.add('active');
+          document.getElementById(target).classList.add('active');
+        });
+      });
+    </script>
   </body>
 </html>

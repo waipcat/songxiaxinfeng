@@ -231,8 +231,6 @@ a {
   justify-content: center;
   overflow: hidden;
   border-radius: 20px;
-  min-height: 400px;
-  max-height: 85vh;
   background:
     radial-gradient(ellipse at 18% 22%, rgba(96, 93, 236, 0.18) 0%, transparent 55%),
     radial-gradient(ellipse at 82% 78%, rgba(14, 165, 233, 0.16) 0%, transparent 55%),
@@ -662,6 +660,98 @@ h3 {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   border-color: var(--primary);
   box-shadow: 0 4px 16px rgba(96, 93, 236, 0.4);
+}
+
+.compare-tabs {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.compare-tab {
+  padding: 16px 32px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.compare-tab:hover {
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(96, 93, 236, 0.08) 0%, rgba(96, 93, 236, 0.04) 100%);
+  border-color: rgba(96, 93, 236, 0.3);
+  box-shadow: 0 4px 16px rgba(96, 93, 236, 0.15);
+  transform: translateY(-2px);
+}
+
+.compare-tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(96, 93, 236, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 除湿产品类型装饰背景 */
+.dehumidify-type-bg {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.dehumidify-type-bg[data-type="智爽除湿"] {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.dehumidify-type-bg[data-type="除湿全热"] {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.dehumidify-type-bg[data-type="新风除湿"] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.dehumidify-type-bg[data-type="白色"] {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+/* 除湿对比表格样式优化 */
+.feature-table.dehumidify th .dehumidify-type-bg,
+.params-table.dehumidify th .dehumidify-type-bg {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.feature-table.dehumidify th .series-badge,
+.params-table.dehumidify th .series-badge {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.feature-table.dehumidify th .series-highlight,
+.params-table.dehumidify th .series-highlight {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 0;
 }
 
 .entry-grid,
@@ -2161,6 +2251,26 @@ select::placeholder {
   background: rgba(239, 68, 68, 0.1);
 }
 
+/* 调湿模块行：与空调行保持一致的默认样式 */
+.ac-room-table .ac-humid-row td {
+  /* 底色与空调行保持一致 */
+}
+.ac-room-table .ac-humid-floor {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+.ac-room-table .ac-humid-name {
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.ac-room-table .ac-humid-capacity {
+  font-weight: 400;
+  color: var(--text-primary);
+}
+.ac-room-table tr.ac-system-total {
+  border-top: 2px solid var(--primary);
+}
+
 .fresh-room-table {
   width: 100%;
   border-collapse: collapse;
@@ -2908,10 +3018,66 @@ select::placeholder {
   font-size: 14px;
 }
 
+/* 6恒产品图片展示 */
+.six-product-content {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.six-product-content h3 {
+  color: var(--text-primary);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.six-product-content p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.six-product-content ul {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.six-product-content li {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.six-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.six-images img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.six-images img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
 /* Banner carousel (homepage hero) */
 .banner-carousel {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: auto;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -2919,15 +3085,14 @@ select::placeholder {
 .banner-track {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .banner-slide {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   opacity: 0;
   visibility: hidden;
@@ -2937,6 +3102,7 @@ select::placeholder {
     visibility 0.8s ease,
     filter 0.6s ease;
   z-index: 0;
+  display: none;
 }
 
 .banner-slide.active {
@@ -2944,6 +3110,7 @@ select::placeholder {
   visibility: visible;
   z-index: 1;
   filter: saturate(1.1) contrast(1.04);
+  display: block;
 }
 
 /* 暗角 + 顶部高光叠加层 */
