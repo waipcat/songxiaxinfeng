@@ -2130,6 +2130,7 @@ function initSixFresh() {
 
     renderSystems(systems);
     updateSixSummary();
+    body.dispatchEvent(new CustomEvent('freshRoomsChanged'));
   }
 
   function pickFanModel(airflow, fanType) {
@@ -2350,7 +2351,8 @@ function initSixFresh() {
     `;
     body.appendChild(tr);
     tr.querySelector('.room-del').addEventListener('click', () => { tr.remove(); calcAll(); rebuildSystems(); });
-    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { calcRoom(tr); rebuildSystems(); }));
+    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { calcRoom(tr); }));
+    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('change', () => { rebuildSystems(); }));
 
     const focusable = Array.from(tr.querySelectorAll('input, select')).filter(el => !el.disabled && el.type !== 'button');
     focusable.forEach((el, idx) => {
@@ -2909,7 +2911,7 @@ function initSixAc() {
     tr.innerHTML = `
       <td><input type="text" class="ac-r-floor" placeholder="楼层" value="${floor || ''}" /></td>
       <td><input type="text" class="ac-r-name" placeholder="房间名称" value="${name || ''}" /></td>
-      <td><input type="number" class="ac-r-area" min="5" max="200" value="${area || 20}" /></td>
+      <td><input type="number" class="ac-r-area" min="5" max="200" value="${area || ''}" /></td>
       <td><input type="number" class="ac-r-load" min="80" max="300" value="${load || 220}" /></td>
       <td class="ac-r-required">-</td>
       <td><select class="ac-r-series">${seriesOptions.map(o => `<option value="${o.value}"${(series || defaultIndoorSeries) === o.value ? ' selected' : ''}>${o.label}</option>`).join('')}</select></td>
@@ -2949,19 +2951,15 @@ function initSixAc() {
   });
   document.querySelector('#sixAcOverRatio')?.addEventListener('input', updateTable);
 
-  // 从新风选型同步房间信息（只同步楼层、房间名称、面积）
+  // 从新风选型同步房间信息（楼层、房间名称、面积总是取自新风；冷负荷、内机系列按行索引保留AC侧的修改）
   function syncFromFresh() {
     const freshRows = document.querySelectorAll('#smartFreshBody tr:not(.sf-system-row)');
     const existingRows = tableBody.querySelectorAll('tr:not(.ac-system-total)');
     
-    // 获取现有房间数据（保留用户已修改的字段，但不保留sysid）
-    const existingData = new Map();
+    // 保存AC侧用户已修改的字段（按行索引，不依赖房间名匹配）
+    const savedSettings = [];
     existingRows.forEach(row => {
-      const name = row.querySelector('.ac-r-name')?.value || '';
-      const floor = row.querySelector('.ac-r-floor')?.value || '';
-      const key = `${floor}-${name}`;
-      existingData.set(key, {
-        area: row.querySelector('.ac-r-area')?.value || '20',
+      savedSettings.push({
         load: row.querySelector('.ac-r-load')?.value || '220',
         series: row.querySelector('.ac-r-series')?.value || defaultIndoorSeries
       });
@@ -2970,35 +2968,33 @@ function initSixAc() {
     // 清空现有表格
     tableBody.innerHTML = '';
 
-    // 根据新风房间重建（只同步楼层、房间名称、面积）
-    freshRows.forEach(row => {
+    // 根据新风房间重建
+    freshRows.forEach((row, idx) => {
       const name = row.querySelector('.sf-name')?.value || '';
       const floor = row.querySelector('.sf-floor')?.value || '';
       const area = Number(row.querySelector('.sf-area')?.value || 0);
-      const key = `${floor}-${name}`;
       
-      // 如果该房间已存在，保留用户的自定义设置（但不保留sysid）
-      const existing = existingData.get(key);
-      const finalArea = existing ? existing.area : (area || 20);
-      const finalLoad = existing ? existing.load : '220';
-      const finalSeries = existing ? existing.series : defaultIndoorSeries;
+      // 按索引保留AC侧设置，面积始终取自新风
+      const saved = savedSettings[idx] || {};
+      const finalArea = area || '';
+      const finalLoad = saved.load || '220';
+      const finalSeries = saved.series || defaultIndoorSeries;
       
-      addRoom(name, floor, finalArea, finalLoad, finalSeries, 1, 1); // sysid默认设为1，由系统划分逻辑处理
+      addRoom(name, floor, finalArea, finalLoad, finalSeries, 1, 1);
     });
+    tableBody.dispatchEvent(new CustomEvent('acRoomsChanged'));
   }
 
-  // 监听新风表格变化
+  // 监听新风表格变化（change 在失焦时触发，避免每输入一个字符就同步）
   const freshBody = document.querySelector('#smartFreshBody');
   if (freshBody) {
-    freshBody.addEventListener('input', (e) => {
+    freshBody.addEventListener('change', (e) => {
       if (e.target.matches('.sf-name, .sf-floor, .sf-area, .sf-sysid')) {
         syncFromFresh();
       }
     });
-    freshBody.addEventListener('change', (e) => {
-      if (e.target.matches('.sf-sysid')) {
-        syncFromFresh();
-      }
+    freshBody.addEventListener('freshRoomsChanged', () => {
+      syncFromFresh();
     });
   }
 
@@ -3138,6 +3134,9 @@ function initSixFloorHeat() {
         setTimeout(syncFromAc, 50);
       }
     });
+    acBody.addEventListener('acRoomsChanged', () => {
+      setTimeout(syncFromAc, 50);
+    });
   }
 
   document.querySelector('#sixAcAddRoomBtn')?.addEventListener('click', () => {
@@ -3153,19 +3152,19 @@ function updateSixSummary() {
   const itemMap = new Map();
   const itemOrder = [];
 
-  function addOrMerge(category, type, model, count = 1, isOptional = false) {
+  function addOrMerge(category, type, model, count = 1, isOptional = false, selectOptions = null) {
     if (!model) return;
     const key = `${type}|||${model}`;
     if (itemMap.has(key)) {
       itemMap.get(key).count += count;
     } else {
-      itemMap.set(key, { category, type, model, count, isOptional });
+      itemMap.set(key, { category, type, model, count, isOptional, selectOptions });
       itemOrder.push(key);
     }
   }
 
   /* ── 新风模块 ── */
-  const freshSysRows = document.querySelectorAll('.sf-system-row');
+  const freshSysRows = document.querySelectorAll('#smartFreshEquipBody .sf-system-row');
   freshSysRows.forEach(row => {
     const fanTypeVal = row.querySelector('.sf-fan-type')?.value || 'freshAir';
     const fanTypeName = smartSelectorData.fanTypes[fanTypeVal]?.label || '新风';
@@ -3199,7 +3198,11 @@ function updateSixSummary() {
       addOrMerge('空调模块', '空调外机', outdoorCell.value);
     }
   });
-  addOrMerge('空调模块', '空调控制器', hasFHModule ? smartSelectorData.controllers.withFloorHeat : smartSelectorData.controllers.withoutFloorHeat);
+  // 空调控制器：记录当前已选值
+  const prevCtrlSel = sumBody.querySelector('.sum-ac-ctrl-select')?.value;
+  const defCtrl = hasFHModule ? smartSelectorData.controllers.withFloorHeat : smartSelectorData.controllers.withoutFloorHeat;
+  const ctrlModel = prevCtrlSel || defCtrl;
+  addOrMerge('空调模块', '空调控制器', ctrlModel, 1, false, smartSelectorData.controllers.acControllers);
 
   /* ── 地暖模块 ── */
   if (hasFHModule) {
@@ -3238,7 +3241,15 @@ function updateSixSummary() {
         html += `<td class="sum-category" rowspan="${keys.length}">${cat}</td>`;
       }
       html += `<td>${item.type}</td>`;
-      html += `<td>${item.model}</td>`;
+      if (item.selectOptions) {
+        html += `<td><select class="sum-ac-ctrl-select" data-ctrl="true">`;
+        item.selectOptions.forEach(opt => {
+          html += `<option value="${opt}"${opt === item.model ? ' selected' : ''}>${opt}</option>`;
+        });
+        html += `</select></td>`;
+      } else {
+        html += `<td>${item.model}</td>`;
+      }
       if (item.isOptional) {
         html += `<td class="sum-check-col"><input type="checkbox" checked /></td>`;
       } else {
@@ -3248,6 +3259,7 @@ function updateSixSummary() {
     });
   }
   sumBody.innerHTML = html;
+  sumBody.querySelector('.sum-ac-ctrl-select')?.addEventListener('change', updateSixSummary);
 }
 
 document.addEventListener('DOMContentLoaded', initSixSmartSelector);
@@ -3360,6 +3372,7 @@ function initGen2Fresh() {
 
     renderSystems(systems);
     updateGen2Summary();
+    body.dispatchEvent(new CustomEvent('freshRoomsChanged'));
   }
 
   function pickFanModel(airflow, fanType) {
@@ -3530,7 +3543,8 @@ function initGen2Fresh() {
     `;
     body.appendChild(tr);
     tr.querySelector('.room-del').addEventListener('click', () => { tr.remove(); calcAll(); rebuildSystems(); });
-    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { calcRoom(tr); rebuildSystems(); }));
+    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { calcRoom(tr); }));
+    tr.querySelectorAll('input, select').forEach(el => el.addEventListener('change', () => { rebuildSystems(); }));
 
     const focusable = Array.from(tr.querySelectorAll('input, select')).filter(el => !el.disabled && el.type !== 'button');
     focusable.forEach((el, idx) => {
@@ -4237,7 +4251,7 @@ function initGen2Ac() {
     tr.innerHTML = `
       <td><input type="text" class="ac-r-floor" placeholder="楼层" value="${floor || ''}" /></td>
       <td><input type="text" class="ac-r-name" placeholder="房间名称" value="${name || ''}" /></td>
-      <td><input type="number" class="ac-r-area" min="5" max="200" value="${area || 20}" /></td>
+      <td><input type="number" class="ac-r-area" min="5" max="200" value="${area || ''}" /></td>
       <td><input type="number" class="ac-r-load" min="80" max="300" value="${load || 220}" /></td>
       <td class="ac-r-required">-</td>
       <td><select class="ac-r-series">${seriesOptions.map(o => `<option value="${o.value}"${(series || defaultIndoorSeries) === o.value ? ' selected' : ''}>${o.label}</option>`).join('')}</select></td>
@@ -4276,17 +4290,15 @@ function initGen2Ac() {
   });
   document.querySelector('#gen2AcOverRatio')?.addEventListener('input', updateTable);
 
+  // 从新风选型同步房间信息（楼层、房间名称、面积总是取自新风；冷负荷、内机系列按行索引保留AC侧的修改）
   function syncFromFresh() {
     const freshRows = document.querySelectorAll('#gen2FreshBody tr:not(.sf-system-row)');
     const existingRows = tableBody.querySelectorAll('tr:not(.ac-system-total)');
 
-    const existingData = new Map();
+    // 保存AC侧用户已修改的字段（按行索引，不依赖房间名匹配）
+    const savedSettings = [];
     existingRows.forEach(row => {
-      const name = row.querySelector('.ac-r-name')?.value || '';
-      const floor = row.querySelector('.ac-r-floor')?.value || '';
-      const key = `${floor}-${name}`;
-      existingData.set(key, {
-        area: row.querySelector('.ac-r-area')?.value || '20',
+      savedSettings.push({
         load: row.querySelector('.ac-r-load')?.value || '220',
         series: row.querySelector('.ac-r-series')?.value || defaultIndoorSeries
       });
@@ -4294,32 +4306,32 @@ function initGen2Ac() {
 
     tableBody.innerHTML = '';
 
-    freshRows.forEach(row => {
+    // 根据新风房间重建
+    freshRows.forEach((row, idx) => {
       const name = row.querySelector('.sf-name')?.value || '';
       const floor = row.querySelector('.sf-floor')?.value || '';
       const area = Number(row.querySelector('.sf-area')?.value || 0);
-      const key = `${floor}-${name}`;
 
-      const existing = existingData.get(key);
-      const finalArea = existing ? existing.area : (area || 20);
-      const finalLoad = existing ? existing.load : '220';
-      const finalSeries = existing ? existing.series : defaultIndoorSeries;
+      // 按索引保留AC侧设置，面积始终取自新风
+      const saved = savedSettings[idx] || {};
+      const finalArea = area || '';
+      const finalLoad = saved.load || '220';
+      const finalSeries = saved.series || defaultIndoorSeries;
 
       addRoom(name, floor, finalArea, finalLoad, finalSeries, 1, 1);
     });
   }
 
+  // 监听新风表格变化（change 在失焦时触发，避免每输入一个字符就同步）
   const freshBody = document.querySelector('#gen2FreshBody');
   if (freshBody) {
-    freshBody.addEventListener('input', (e) => {
+    freshBody.addEventListener('change', (e) => {
       if (e.target.matches('.sf-name, .sf-floor, .sf-area, .sf-sysid')) {
         syncFromFresh();
       }
     });
-    freshBody.addEventListener('change', (e) => {
-      if (e.target.matches('.sf-sysid')) {
-        syncFromFresh();
-      }
+    freshBody.addEventListener('freshRoomsChanged', () => {
+      syncFromFresh();
     });
   }
 
@@ -4470,13 +4482,13 @@ function updateGen2Summary() {
   const itemMap = new Map();
   const itemOrder = [];
 
-  function addOrMerge(category, type, model, count = 1, isOptional = false) {
+  function addOrMerge(category, type, model, count = 1, isOptional = false, selectOptions = null) {
     if (!model) return;
     const key = `${type}|||${model}`;
     if (itemMap.has(key)) {
       itemMap.get(key).count += count;
     } else {
-      itemMap.set(key, { category, type, model, count, isOptional });
+      itemMap.set(key, { category, type, model, count, isOptional, selectOptions });
       itemOrder.push(key);
     }
   }
@@ -4507,7 +4519,11 @@ function updateGen2Summary() {
       addOrMerge('空调模块', '空调外机', outdoorCell.value);
     }
   });
-  addOrMerge('空调模块', '空调控制器', hasFHModule ? smartSelectorData.controllers.withFloorHeat : smartSelectorData.controllers.withoutFloorHeat);
+  // 空调控制器：记录当前已选值
+  const prevCtrlSel = sumBody.querySelector('.sum-ac-ctrl-select')?.value;
+  const defCtrl = hasFHModule ? smartSelectorData.controllers.withFloorHeat : smartSelectorData.controllers.withoutFloorHeat;
+  const ctrlModel = prevCtrlSel || defCtrl;
+  addOrMerge('空调模块', '空调控制器', ctrlModel, 1, false, smartSelectorData.controllers.acControllers);
 
   if (hasFHModule) {
     document.querySelectorAll('#gen2FHBody .fh-a2w-select').forEach(sel => {
@@ -4543,7 +4559,15 @@ function updateGen2Summary() {
         html += `<td class="sum-category" rowspan="${keys.length}">${cat}</td>`;
       }
       html += `<td>${item.type}</td>`;
-      html += `<td>${item.model}</td>`;
+      if (item.selectOptions) {
+        html += `<td><select class="sum-ac-ctrl-select" data-ctrl="true">`;
+        item.selectOptions.forEach(opt => {
+          html += `<option value="${opt}"${opt === item.model ? ' selected' : ''}>${opt}</option>`;
+        });
+        html += `</select></td>`;
+      } else {
+        html += `<td>${item.model}</td>`;
+      }
       if (item.isOptional) {
         html += `<td class="sum-check-col"><input type="checkbox" checked /></td>`;
       } else {
@@ -4553,6 +4577,7 @@ function updateGen2Summary() {
     });
   }
   sumBody.innerHTML = html;
+  sumBody.querySelector('.sum-ac-ctrl-select')?.addEventListener('change', updateGen2Summary);
 }
 
 document.addEventListener('DOMContentLoaded', initSixGen2Selector);
