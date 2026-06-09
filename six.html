@@ -5,103 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>六恒系统 | 松下新风产品中心</title>
     <link rel="stylesheet" href="assets/styles.css" />
-    <style>
-      .tab-container {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        padding: 20px;
-        background: #F1F5F9;
-        border-bottom: 1px solid #E2E8F0;
-      }
-
-      .tab-btn {
-        padding: 12px 28px;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
-        border-radius: 24px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: white;
-        color: #475569;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-
-      .tab-btn.active {
-        background: #0F172A;
-        color: white;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
-      }
-
-      .tab-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      }
-
-      .tab-content {
-        display: none;
-      }
-
-      .tab-content.active {
-        display: block;
-      }
-
-      .six-product-section {
-        margin: 0;
-        padding: 0;
-      }
-
-      .six-product-title {
-        text-align: center;
-        padding: 32px 24px;
-        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-        color: white;
-      }
-
-      .six-product-title h2 {
-        font-size: 36px;
-        font-weight: 700;
-        margin-bottom: 8px;
-      }
-
-      .six-product-title p {
-        font-size: 16px;
-        opacity: 0.9;
-      }
-
-      .six-images-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding: 16px;
-      }
-
-      .six-images-grid img {
-        width: 100%;
-        max-width: 1000px;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-
-      .placeholder-content {
-        text-align: center;
-        padding: 80px 24px;
-        background: #F8FAFC;
-      }
-
-      .placeholder-content h3 {
-        font-size: 24px;
-        color: #475569;
-        margin-bottom: 16px;
-      }
-
-      .placeholder-content p {
-        font-size: 16px;
-        color: #94A3B8;
-      }
-    </style>
+    <link rel="stylesheet" href="assets/six.css" />
   </head>
   <body>
     <header class="topbar">
@@ -126,11 +30,11 @@
       <div class="tab-content" id="content-2gen">
         <div class="six-product-section">
           <div class="six-images-grid">
-            <img src="sources/2-1.jpg" alt="6恒2代产品图1" />
-            <img src="sources/2-2.jpg" alt="6恒2代产品图2" />
-            <img src="sources/2-3.jpg" alt="6恒2代产品图3" />
-            <img src="sources/2-4.jpg" alt="6恒2代产品图4" />
-            <img src="sources/2-5.jpg" alt="6恒2代产品图5" />
+            <img src="assets/images/six/2-1.jpg" alt="6恒2代产品图1" />
+            <img src="assets/images/six/2-2.jpg" alt="6恒2代产品图2" />
+            <img src="assets/images/six/2-3.jpg" alt="6恒2代产品图3" />
+            <img src="assets/images/six/2-4.jpg" alt="6恒2代产品图4" />
+            <img src="assets/images/six/2-5.jpg" alt="6恒2代产品图5" />
           </div>
         </div>
       </div>
@@ -138,11 +42,11 @@
       <div class="tab-content active" id="content-smart">
         <div class="six-product-section">
           <div class="six-images-grid">
-            <img src="sources/1.jpg" alt="6恒智选产品图1" />
-            <img src="sources/2.jpg" alt="6恒智选产品图2" />
-            <img src="sources/3.jpg" alt="6恒智选产品图3" />
-            <img src="sources/4.jpg" alt="6恒智选产品图4" />
-            <img src="sources/5.jpg" alt="6恒智选产品图5" />
+            <img src="assets/images/six/1.jpg" alt="6恒智选产品图1" />
+            <img src="assets/images/six/2.jpg" alt="6恒智选产品图2" />
+            <img src="assets/images/six/3.jpg" alt="6恒智选产品图3" />
+            <img src="assets/images/six/4.jpg" alt="6恒智选产品图4" />
+            <img src="assets/images/six/5.jpg" alt="6恒智选产品图5" />
           </div>
         </div>
       </div>
@@ -150,21 +54,6 @@
 
     <footer class="footer"><span>Panasonic 新风产品中心草稿</span><span>六恒系统</span></footer>
     
-    <script>
-      const tabs = document.querySelectorAll('.tab-btn');
-      const contents = document.querySelectorAll('.tab-content');
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const target = tab.id.replace('tab-', 'content-');
-          
-          tabs.forEach(t => t.classList.remove('active'));
-          contents.forEach(c => c.classList.remove('active'));
-          
-          tab.classList.add('active');
-          document.getElementById(target).classList.add('active');
-        });
-      });
-    </script>
+    <script src="assets/six.js"></script>
   </body>
 </html>

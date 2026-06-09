@@ -8,12 +8,12 @@ const products = [
     tags: ["分区控制", "5种探头", "智能控制"],
     highlight: "可根据每个区域的不同需求，独立控制风量。",
     category: "全热新风",
-    image: "sources/zjd3c.png",
-    catalog: "sources/样本-ZJD3C-全热-ZJD3C-智净御风系列.PDF",
-    manual: "sources/说明书-ZJD3C-全热-ZJD3C-智净御风.pdf",
+    image: "assets/images/products/zjd3c.png",
+    catalog: "assets/docs/样本-ZJD3C-全热-ZJD3C-智净御风系列.PDF",
+    manual: "assets/docs/说明书-ZJD3C-全热-ZJD3C-智净御风.pdf",
     accessories: [
-      { name: "御风箱", file: "sources/说明书-ZJD3C-配件-MDJ1C-御风箱.pdf" },
-      { name: "线控器", file: "sources/说明书-ZJD3C-配件-SWJ1C-线控器.pdf" }
+      { name: "御风箱", file: "assets/docs/说明书-ZJD3C-配件-MDJ1C-御风箱.pdf" },
+      { name: "线控器", file: "assets/docs/说明书-ZJD3C-配件-SWJ1C-线控器.pdf" }
     ]
   },
   {
@@ -25,11 +25,11 @@ const products = [
     tags: ["消毒功能", "畅销系列", "智能感应"],
     highlight: "具有消毒功能，有效杀灭病毒和细菌。",
     category: "全热新风",
-    image: "sources/ZDP2C.png",
-    catalog: "sources/样本-ZDP2C-全热-ZDP2C-全热交换器.PDF",
-    manual: "sources/说明书-ZDP2C-全热-253550ZDP2C-薄型全热.pdf",
+    image: "assets/images/products/ZDP2C.png",
+    catalog: "assets/docs/样本-ZDP2C-全热-ZDP2C-全热交换器.PDF",
+    manual: "assets/docs/说明书-ZDP2C-全热-253550ZDP2C-薄型全热.pdf",
     accessories: [
-      { name: "15ZDP2C", file: "sources/说明书-ZDP2C-全热-15ZDP2C-薄型全热.pdf" }
+      { name: "15ZDP2C", file: "assets/docs/说明书-ZDP2C-全热-15ZDP2C-薄型全热.pdf" }
     ]
   },
   {
@@ -41,9 +41,9 @@ const products = [
     tags: ["小巧机身", "PM2.5净化", "控制器升级"],
     highlight: "体积小巧，适合小户型、公寓或别墅单层使用。",
     category: "全热新风",
-    image: "sources/ZM2C.png",
-    catalog: "sources/样本-ZM2C-全热-ZM2C-迷你全热交换器.pdf",
-    manual: "sources/说明书-ZM2C-全热-ZM2C-迷你全热.pdf"
+    image: "assets/images/products/ZM2C.png",
+    catalog: "assets/docs/样本-ZM2C-全热-ZM2C-迷你全热交换器.pdf",
+    manual: "assets/docs/说明书-ZM2C-全热-ZM2C-迷你全热.pdf"
   },
   {
     id: "zxh1c",
@@ -54,8 +54,8 @@ const products = [
     tags: ["分区控制", "超大除湿量", "智能调节"],
     highlight: "超大除湿量，并且可对某个区域进行单独控制。",
     category: "除湿产品",
-    image: "sources/zxh1c.png",
-    manual: "sources/说明书-ZXH1C-除湿全热-除湿全热.pdf"
+    image: "assets/images/products/zxh1c.png",
+    manual: "assets/docs/说明书-ZXH1C-除湿全热-除湿全热.pdf"
   },
   {
     id: "zxc2c",
@@ -66,9 +66,9 @@ const products = [
     tags: ["消毒功能", "智能模式", "高效除湿"],
     highlight: "同时具备除湿和全热交换功能，适用不同天气。",
     category: "除湿产品",
-    image: "sources/ZXC2C.png",
-    catalog: "sources/样本-ZXC2C-除湿全热-ZXC2C松下新风除湿机.pdf",
-    manual: "sources/说明书-ZXC2C-除湿全热.pdf"
+    image: "assets/images/products/ZXC2C.png",
+    catalog: "assets/docs/样本-ZXC2C-除湿全热-ZXC2C松下新风除湿机.pdf",
+    manual: "assets/docs/说明书-ZXC2C-除湿全热.pdf"
   },
   {
     id: "nc1c-nxc2c",
@@ -77,13 +77,13 @@ const products = [
     type: "吊顶式",
     exchange: "新风+除湿",
     tags: ["新风除湿", "稳定运行", "智能控制"],
-    image: "sources/NXC1C.png",
+    image: "assets/images/products/NXC1C.png",
     highlight: "兼具新风和除湿功能，适用不同环境。",
     category: "除湿产品",
-    catalog: "sources/样本-NC1C-除湿-NC_NCD松下新风除湿机.PDF",
+    catalog: "assets/docs/样本-NC1C-除湿-NC_NCD松下新风除湿机.PDF",
     accessories: [
-      { name: "NC1C", file: "sources/说明书-NC1C-除湿新风-除湿新风机.pdf" },
-      { name: "NXC2C", file: "sources/说明书-50NXC2C-除湿新风-除湿新风机.pdf" }
+      { name: "NC1C", file: "assets/docs/说明书-NC1C-除湿新风-除湿新风机.pdf" },
+      { name: "NXC2C", file: "assets/docs/说明书-50NXC2C-除湿新风-除湿新风机.pdf" }
     ]
   },
 ];
