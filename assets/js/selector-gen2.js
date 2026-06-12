@@ -1054,6 +1054,7 @@ function initGen2Ac() {
 
       addRoom(name, floor, finalArea, finalLoad, finalSeries, 1, 1);
     });
+    tableBody.dispatchEvent(new CustomEvent('acRoomsChanged'));
   }
 
   // 监听新风表格变化（change 在失焦时触发，避免每输入一个字符就同步）
@@ -1200,6 +1201,9 @@ function initGen2FloorHeat() {
       if (e.target.matches('.ac-r-sysid')) {
         setTimeout(syncFromAc, 50);
       }
+    });
+    acBody.addEventListener('acRoomsChanged', () => {
+      setTimeout(syncFromAc, 50);
     });
   }
 
