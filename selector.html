@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>选型工具 | 松下新风产品中心</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
   </head>
   <body>
     <header class="topbar">
@@ -282,6 +283,12 @@
         <div class="selx-heading">
           <h2>6恒2代选型</h2>
           <p>6恒气候站2代系统选型工具</p>
+          <div class="selx-export-btns">
+            <button class="selx-export-btn selx-export-xlsx" data-export-xlsx="gen2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              导出Excel
+            </button>
+          </div>
         </div>
 
         <div class="selx-tabs" id="gen2Tabs">
@@ -460,6 +467,12 @@
         <div class="selx-heading">
           <h2>6恒智选选型</h2>
           <p>6恒气候站智选系统选型工具</p>
+          <div class="selx-export-btns">
+            <button class="selx-export-btn selx-export-xlsx" data-export-xlsx="smart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              导出Excel
+            </button>
+          </div>
         </div>
 
         <div class="selx-tabs" id="sixSmartTabs">
@@ -652,5 +665,6 @@
     <script src="assets/js/selector-ac.js"></script>
     <script src="assets/js/selector-gen2.js"></script>
     <script src="assets/js/selector-smart.js"></script>
+    <script src="assets/js/selector-export.js"></script>
   </body>
 </html>

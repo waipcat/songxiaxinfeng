@@ -246,8 +246,8 @@ const smartSelectorData = {
     airBox: "FV-BMS1C",
     acControllers: ["CZ-RD504DX1", "CZ-RD504DX2", "CZ-RD506DX2", "CZ-RD602DX2", "CZ-RD603DX1", "CZ-559DW"],
     /* 6恒2代 控制器 */
-    gen2Main: "FV-SEZTB01",
-    gen2Sub: "FV-SEZTB02",
+    gen2Main: "FV-SWZTB01",
+    gen2Sub: "FV-SWZTB02",
   },
 };
 

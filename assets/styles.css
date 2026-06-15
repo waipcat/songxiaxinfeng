@@ -1475,6 +1475,71 @@ select::placeholder {
   color: var(--text-secondary);
 }
 
+.selx-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.selx-heading h2 {
+  flex: 1 1 auto;
+}
+
+.selx-heading p {
+  flex: 1 1 100%;
+}
+
+.selx-export-btns {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.selx-export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.selx-export-btn svg {
+  flex-shrink: 0;
+}
+
+.selx-export-xlsx {
+  background: #16a34a;
+  color: #fff;
+}
+
+.selx-export-xlsx:hover {
+  background: #15803d;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+@media (max-width: 768px) {
+  .selx-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .selx-export-btns {
+    margin-left: 0;
+    width: 100%;
+  }
+  .selx-export-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
 .selx-layout {
   display: grid;
   grid-template-columns: 1fr minmax(300px, 400px);
@@ -3199,4 +3264,190 @@ select::placeholder {
   background: #fff;
   width: 22px;
   border-radius: 4px;
+}
+
+/* ── Export Dialog ── */
+.export-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.export-dialog {
+  background: #fff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  animation: slideUp 0.25s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.export-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.export-dialog-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+.export-dialog-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+.export-dialog-close:hover { color: var(--text-primary); }
+.export-dialog-body {
+  padding: 20px 24px;
+}
+.export-dialog-desc {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.export-form-row {
+  margin-bottom: 14px;
+}
+.export-form-row label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.export-form-row input,
+.export-form-row textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--surface-light);
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+.export-form-row input:focus,
+.export-form-row textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(96, 93, 236, 0.12);
+}
+.export-form-row textarea {
+  resize: vertical;
+  min-height: 56px;
+}
+.export-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--border);
+}
+.export-cancel-btn {
+  padding: 9px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.export-cancel-btn:hover {
+  background: var(--surface-light);
+}
+.export-confirm-btn {
+  padding: 9px 24px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.export-confirm-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(96, 93, 236, 0.35);
+}
+
+/* ── Export Format Grid ── */
+.export-format-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+.export-format-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.export-format-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(96, 93, 236, 0.15);
+  transform: translateY(-2px);
+}
+.export-format-card:active {
+  transform: translateY(0);
+}
+.export-format-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+.export-format-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.export-format-icon.pdf-icon {
+  background: linear-gradient(135deg, #fce7f3, #ede9fe);
+  color: #db2777;
+}
+.export-format-info {
+  text-align: center;
+}
+.export-format-info strong {
+  display: block;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.export-format-info span {
+  font-size: 11px;
+  color: var(--text-muted);
 }
