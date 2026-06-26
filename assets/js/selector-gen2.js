@@ -1257,11 +1257,16 @@ function updateGen2Summary() {
       addOrMerge('空调模块', '空调外机', outdoorCell.value);
     }
   });
-  // 空调控制器：记录当前已选值
+  // 空调控制器：每台内机一个控制器
   const prevCtrlSel = sumBody.querySelector('.sum-ac-ctrl-select')?.value;
   const defCtrl = hasFHModule ? smartSelectorData.controllers.withFloorHeat : smartSelectorData.controllers.withoutFloorHeat;
   const ctrlModel = prevCtrlSel || defCtrl;
-  addOrMerge('空调模块', '空调控制器', ctrlModel, 1, false, smartSelectorData.controllers.acControllers);
+  const acTotalCount = [...document.querySelectorAll('#gen2AcRoomTableBody tr:not(.ac-system-total):not(.ac-humid-row)')].reduce((sum, row) => {
+    const model = row.querySelector('.ac-r-model-select')?.value;
+    const count = Number(row.querySelector('.ac-r-count')?.value) || 0;
+    return sum + (model && count > 0 ? count : 0);
+  }, 0);
+  addOrMerge('空调模块', '空调控制器', ctrlModel, acTotalCount, false, smartSelectorData.controllers.acControllers);
 
   if (hasFHModule) {
     document.querySelectorAll('#gen2FHBody .fh-a2w-select').forEach(sel => {
