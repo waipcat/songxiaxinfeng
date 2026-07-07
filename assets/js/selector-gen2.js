@@ -255,7 +255,7 @@ function initGen2Fresh() {
 
   function addRoom(data) {
     const name = data?.name || '';
-    const area = data?.area ?? 30;
+    const area = data?.area ?? "";
     const height = data?.height ?? 2.7;
     const ach = data?.ach ?? 1.0;
     const floor = data?.floor ?? '1';

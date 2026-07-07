@@ -280,10 +280,10 @@ function calculateSelector() {
 
 /* ── 功能→系列固定映射 ── */
 const featureSeriesMap = {
-  zoning: { label: "分区控制", seriesId: "zjd3c", seriesName: "智净御风系列" },
-  disinfection: { label: "空气消毒", seriesId: "zdp2c", seriesName: "家用薄型系列" },
+  zoning: { label: "分区控制-ZJD3C系列", seriesId: "zjd3c", seriesName: "智净御风系列" },
+  disinfection: { label: "空气消毒-ZDP2C系列", seriesId: "zdp2c", seriesName: "家用薄型系列" },
 
-  compact: { label: "小巧体积", seriesId: "zm2c", seriesName: "迷你系列" },
+  compact: { label: "小巧体积-ZM2C系列", seriesId: "zm2c", seriesName: "迷你系列" },
 };
 
 function getSelxFeature() {
@@ -512,11 +512,11 @@ function updateSelxResult() {
   let roomIdx = 0;
 
   function addRoom(data) {
-    const type = data?.type !== undefined ? data.type : "客厅";
-    const area = data?.area !== undefined ? data.area : 30;
+    const type = data?.type !== undefined ? data.type : "";
+    const area = data?.area !== undefined ? data.area : "";
     const height = data?.height ?? 2.7;
     const ach = data?.ach ?? 1.0;
-    const ppl = data?.people ?? 2;
+    const ppl = data?.people ?? 1;
     const pplRate = data?.pplRate ?? 30;
 
     const tr = document.createElement("tr");
@@ -540,8 +540,8 @@ function updateSelxResult() {
     updateSelxResult();
   }
 
-  addRoom({ type: "", area: "", height: 2.7, ach: 1.0, people: 2, pplRate: 30 });
-  addRoom({ type: "", area: "", height: 2.7, ach: 1.0, people: 2, pplRate: 30 });
+  addRoom({ type: "", area: "", height: 2.7, ach: 1.0, people: 1, pplRate: 30 });
+  addRoom({ type: "", area: "", height: 2.7, ach: 1.0, people: 1, pplRate: 30 });
   addRoom({ type: "", area: "", height: 2.7, ach: 1.0, people: 1, pplRate: 30 });
 
   addRoomBtn?.addEventListener("click", () => addRoom());
