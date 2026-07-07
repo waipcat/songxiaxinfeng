@@ -3185,7 +3185,7 @@ select::placeholder {
 .banner-carousel {
   position: relative;
   width: 100%;
-  height: auto;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -3193,14 +3193,15 @@ select::placeholder {
 .banner-track {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .banner-slide {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   opacity: 0;
   visibility: hidden;
@@ -3210,7 +3211,6 @@ select::placeholder {
     visibility 0.8s ease,
     filter 0.6s ease;
   z-index: 0;
-  display: none;
 }
 
 .banner-slide.active {
@@ -3218,7 +3218,6 @@ select::placeholder {
   visibility: visible;
   z-index: 1;
   filter: saturate(1.1) contrast(1.04);
-  display: block;
 }
 
 /* 暗角 + 顶部高光叠加层 */
