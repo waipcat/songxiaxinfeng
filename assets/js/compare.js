@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         zjd3c: "智净系列",
         zdp2c: "薄型系列",
         zm2c: "迷你系列",
+        zy1c: "ZY系列",
       } : {
         zxh1c: "智爽除湿",
         zxc2c: "除湿全热",
@@ -56,17 +57,23 @@ document.addEventListener('DOMContentLoaded', () => {
           html += `<tr>`;
           if (ri === 0) html += `<td class="feature-category" rowspan="${cat.rows.length}">${cat.name}</td>`;
           html += `<td class="feature-label">${row.label}</td>`;
-          series.forEach(s => {
-            const value = renderFeatureValue(row.values[s.id], row.text);
-            let highlightClass = '';
-            if (type === 'freshAir') {
-              const zjd3cFeatures = ["活性炭滤网", "御风箱（选配）", "CO₂传感器", "甲醛传感器", "旁通模式"];
-              const zdp2cFeatures = ["消毒功能", "加强PM2.5过滤网", "PM2.5传感器", "自动模式", "高静压模式", "内循环"];
-              if (zjd3cFeatures.includes(row.label) && s.id === 'zjd3c') highlightClass = 'feature-zjd3c';
-              if (zdp2cFeatures.includes(row.label) && s.id === 'zdp2c') highlightClass = 'feature-zdp2c';
-            }
-            html += `<td class="feature-cell ${highlightClass}" data-series="${s.id}">${value}</td>`;
-          });
+          if (row.colspan) {
+            // 合并单元格（如保修期所有设备相同）
+            const value = renderFeatureValue(row.text ? row.values : true, row.text);
+            html += `<td class="feature-cell" colspan="${series.length}">${value}</td>`;
+          } else {
+            series.forEach(s => {
+              const value = renderFeatureValue(row.values[s.id], row.text);
+              let highlightClass = '';
+              if (type === 'freshAir') {
+                const zjd3cFeatures = ["活性炭滤网", "御风箱（选配）", "CO₂传感器", "甲醛传感器", "旁通模式"];
+                const zdp2cFeatures = ["消毒功能", "加强PM2.5过滤网", "PM2.5传感器", "自动模式", "高静压模式", "内循环"];
+                if (zjd3cFeatures.includes(row.label) && s.id === 'zjd3c') highlightClass = 'feature-zjd3c';
+                if (zdp2cFeatures.includes(row.label) && s.id === 'zdp2c') highlightClass = 'feature-zdp2c';
+              }
+              html += `<td class="feature-cell ${highlightClass}" data-series="${s.id}">${value}</td>`;
+            });
+          }
           html += `</tr>`;
         });
         html += `</tbody>`;
@@ -83,12 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderCompareParamsWithType = (type = "freshAir") => {
       if (!compareParams) return;
 
-      const seriesIds = type === "freshAir" ? ["zjd3c", "zdp2c", "zm2c"] : ["zxh1c", "zxc2c", "nxc2c", "nc1c"];
+      const seriesIds = type === "freshAir" ? ["zjd3c", "zdp2c", "zm2c", "zy1c"] : ["zxh1c", "zxc2c", "nxc2c", "nc1c"];
 
       const seriesNames = type === "freshAir" ? {
         zjd3c: "智净系列",
         zdp2c: "薄型系列",
         zm2c: "迷你系列",
+        zy1c: "ZY系列",
       } : {
         zxh1c: "智爽除湿",
         zxc2c: "除湿全热",

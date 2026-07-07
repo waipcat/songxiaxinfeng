@@ -284,6 +284,7 @@ const featureSeriesMap = {
   disinfection: { label: "空气消毒-ZDP2C系列", seriesId: "zdp2c", seriesName: "家用薄型系列" },
 
   compact: { label: "小巧体积-ZM2C系列", seriesId: "zm2c", seriesName: "迷你系列" },
+  economical: { label: "经济实惠-ZY1C系列", seriesId: "zy1c", seriesName: "ZY系列" },
 };
 
 function getSelxFeature() {

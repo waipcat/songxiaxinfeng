@@ -1235,13 +1235,51 @@ select::placeholder {
   -webkit-overflow-scrolling: touch;
 }
 
+/* 参数表首列固定（对比页下方表格） */
+.params-table th:first-child,
+.params-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background-clip: padding-box;
+}
+
+.params-table th:first-child {
+  z-index: 3;
+}
+
+.params-table tbody tr:hover td:first-child {
+  background: var(--surface-light);
+}
+
+/* 除参数表外，对比页功能表也追加首列固定 */
+.feature-table th:first-child,
+.feature-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background-clip: padding-box;
+}
+
+.feature-table th:first-child {
+  z-index: 3;
+}
+
+.feature-table tbody.feature-group tr:hover td:first-child {
+  background: linear-gradient(135deg, rgba(96, 93, 236, 0.06) 0%, rgba(14, 165, 233, 0.03) 100%);
+}
+
+/* 功能表的分类列在 sticky 时确保背景填充 */
+.feature-table .feature-category {
+  background: linear-gradient(135deg, rgba(96, 93, 236, 0.06) 0%, rgba(14, 165, 233, 0.03) 100%);
+}
+
 .params-table {
   width: 100%;
   min-width: auto;
   border-collapse: collapse;
   font-size: 13px;
   border-radius: 10px;
-  overflow: hidden;
   border: 1px solid var(--border);
 }
 
@@ -1338,6 +1376,11 @@ select::placeholder {
 .series-badge[data-series="zm2c"] {
   color: #fff;
   background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.series-badge[data-series="zy1c"] {
+  color: #fff;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
 }
 
 .feature-table .feature-category {

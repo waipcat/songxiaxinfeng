@@ -308,7 +308,7 @@ function initSixFresh() {
     const area = data?.area ?? "";
     const height = data?.height ?? 2.7;
     const ach = data?.ach ?? 1.0;
-    const floor = data?.floor ?? '1';
+    const floor = data?.floor ?? '';
     const sysid = data?.sysid ?? 1;
 
     const tr = document.createElement('tr');

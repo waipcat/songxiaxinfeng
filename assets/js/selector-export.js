@@ -74,6 +74,12 @@ function stripLastCol(gridData) {
 
 async function exportXlsx(type) {
   if (typeof ExcelJS === 'undefined') { alert('导出库加载失败，请刷新页面重试'); return; }
+  
+  if (type === 'fresh') {
+    await exportFreshXlsx();
+    return;
+  }
+  
   const prefix = type === 'gen2' ? 'gen2' : 'smart';
   const typeName = type === 'gen2' ? '6恒2代' : '6恒智选';
   const wb = new ExcelJS.Workbook();
@@ -238,6 +244,209 @@ async function exportXlsx(type) {
   const a = document.createElement('a');
   a.href = url;
   a.download = typeName + '_选型报告_' + ds + '.xlsx';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function exportFreshXlsx() {
+  if (typeof ExcelJS === 'undefined') { alert('导出库加载失败，请刷新页面重试'); return; }
+
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet('新风选型');
+
+  const centerAlign = { horizontal: 'center', vertical: 'middle', wrapText: true };
+  const leftAlign = { vertical: 'middle', wrapText: true };
+  const headerFill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF003366' } };
+  const headerFont = { bold: true, color: { argb: 'FFFFFFFF' }, size: 10 };
+  const labelFill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF0F3F6' } };
+  const labelFont = { bold: true, size: 10 };
+  const thinBorder = {
+    top: { style: 'thin', color: { argb: 'FFD0D5DA' } },
+    bottom: { style: 'thin', color: { argb: 'FFD0D5DA' } },
+    left: { style: 'thin', color: { argb: 'FFD0D5DA' } },
+    right: { style: 'thin', color: { argb: 'FFD0D5DA' } }
+  };
+
+  /* ── 基本信息 ── */
+  const activeMode = document.querySelector('#selxMode .mode-btn.active');
+  const mode = activeMode ? activeMode.dataset.mode : 'simple';
+
+  const checkedFeature = document.querySelector('#selxFeatures input:checked');
+  const featureLabel = checkedFeature
+    ? checkedFeature.closest('.feat-btn')?.querySelector('.feat-label')?.textContent || checkedFeature.value
+    : '未选择';
+
+  const airflowEl = document.querySelector('#selxAirflow');
+  const airflow = airflowEl ? airflowEl.textContent.trim() : '—';
+  const reasonEl = document.querySelector('#selxReason');
+  const reason = reasonEl ? reasonEl.textContent.trim() : '';
+
+  const deviceEl = document.querySelector('#selxDevice .selx-device-item');
+  let deviceName = '';
+  let deviceModel = '';
+  if (deviceEl) {
+    const nameEl = deviceEl.querySelector('.dev-name');
+    const modelEl = deviceEl.querySelector('.dev-model');
+    if (nameEl) deviceName = nameEl.textContent.trim().replace(/<br.*$/s, '').trim();
+    if (modelEl) deviceModel = modelEl.textContent.trim();
+  }
+
+  function addBorder(row, from, to) {
+    for (let c = from; c <= to; c++) {
+      row.getCell(c).border = thinBorder;
+    }
+  }
+
+  function setStyle(row, from, to, fill, font, align) {
+    for (let c = from; c <= to; c++) {
+      const cell = row.getCell(c);
+      if (fill) cell.fill = fill;
+      if (font) cell.font = font;
+      if (align) cell.alignment = align;
+      cell.border = thinBorder;
+    }
+  }
+
+  /* ── Section 1: 选型信息 ── */
+  let r = 1;
+  let row = ws.getRow(r);
+  row.getCell(1).value = '新风选型报告';
+  row.font = { bold: true, size: 14, color: { argb: 'FF003366' } };
+  row.height = 30;
+
+  r = 3;
+  row = ws.getRow(r);
+  row.getCell(1).value = '项目';
+  row.getCell(2).value = '内容';
+  setStyle(row, 1, 2, headerFill, headerFont, centerAlign);
+  row.height = 28;
+
+  const infoRows = [
+    ['产品功能型号', featureLabel],
+    ['选型模式', mode === 'simple' ? '简易选型' : '标准选型'],
+  ];
+
+  if (mode === 'simple') {
+    const area = document.querySelector('#simpArea')?.value || '';
+    const height = document.querySelector('#simpHeight')?.value || '';
+    const areaRatio = document.querySelector('#simpAreaRatio')?.value || '';
+    const achRadio = document.querySelector('input[name="simpAch"]:checked');
+    let ach = achRadio ? achRadio.value : '';
+    if (ach === 'custom') {
+      ach = document.querySelector('#simpAchCustom')?.value || '自定义';
+    }
+    infoRows.push(['建筑面积', area + ' m²']);
+    infoRows.push(['层高', height + ' m']);
+    infoRows.push(['新风面积比例', (Number(areaRatio) || 0) + '%']);
+    infoRows.push(['换气次数', ach + ' 次/h']);
+  }
+
+  infoRows.forEach(item => {
+    r++;
+    row = ws.getRow(r);
+    row.getCell(1).value = item[0];
+    row.getCell(2).value = item[1];
+    setStyle(row, 1, 1, labelFill, labelFont, leftAlign);
+    setStyle(row, 2, 2, null, null, centerAlign);
+    row.height = 24;
+  });
+
+  /* ── Section 2: 房间明细（标准模式） ── */
+  if (mode === 'standard') {
+    r += 2;
+    row = ws.getRow(r);
+    row.getCell(1).value = '房间明细';
+    row.font = { bold: true, size: 12, color: { argb: 'FF003366' } };
+    row.height = 26;
+
+    r++;
+    row = ws.getRow(r);
+    const roomHeaders = ['房间名称', '面积(m²)', '层高(m)', '换气次数(次/h)', '人数', '人均新风量(m³/h·人)', '换气风量(m³/h)', '人数风量(m³/h)', '需求风量(m³/h)'];
+    roomHeaders.forEach((h, i) => row.getCell(i + 1).value = h);
+    setStyle(row, 1, roomHeaders.length, headerFill, headerFont, centerAlign);
+    row.height = 28;
+
+    const roomRows = document.querySelectorAll('#freshRoomTableBody tr');
+    roomRows.forEach(tr => {
+      r++;
+      row = ws.getRow(r);
+      const cells = tr.querySelectorAll('td');
+      const vals = [];
+      cells.forEach((td, idx) => {
+        if (idx === cells.length - 1) return; // 跳过删除按钮列
+        const input = td.querySelector('input');
+        vals.push(input ? input.value : td.textContent.trim().replace(/\s+/g, ' '));
+      });
+      vals.forEach((v, i) => row.getCell(i + 1).value = v);
+      setStyle(row, 1, roomHeaders.length, null, null, centerAlign);
+      row.height = 24;
+    });
+
+    // 合计行
+    const foot = document.querySelector('#freshRoomTableFoot');
+    if (foot) {
+      const footTds = foot.querySelectorAll('td');
+      if (footTds.length > 0) {
+        r++;
+        row = ws.getRow(r);
+        // 第一个 td (colspan=6): "合计"
+        row.getCell(1).value = footTds[0].textContent.trim();
+        // 最后3个有效数据列: qAch, qPpl, total
+        const qAchCell = footTds[footTds.length - 4];
+        const qPplCell = footTds[footTds.length - 3];
+        const totalCell = footTds[footTds.length - 2];
+        row.getCell(7).value = qAchCell ? qAchCell.textContent.trim() : '';
+        row.getCell(8).value = qPplCell ? qPplCell.textContent.trim() : '';
+        row.getCell(9).value = totalCell ? totalCell.textContent.trim() : '';
+        setStyle(row, 1, roomHeaders.length, { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF0F3F6' } }, { bold: true, size: 10 }, centerAlign);
+        row.height = 24;
+      }
+    }
+  }
+
+  /* ── Section 3: 选型结果 ── */
+  r += 2;
+  row = ws.getRow(r);
+  row.getCell(1).value = '选型结果';
+  row.font = { bold: true, size: 12, color: { argb: 'FF003366' } };
+  row.height = 26;
+
+  r++;
+  row = ws.getRow(r);
+  row.getCell(1).value = '项目';
+  row.getCell(2).value = '结果';
+  setStyle(row, 1, 2, headerFill, headerFont, centerAlign);
+  row.height = 28;
+
+  const resultRows = [
+    ['建议新风量', airflow],
+    ['推荐设备型号', deviceModel],
+    ['设备系列', deviceName],
+    ['计算说明', reason],
+  ];
+
+  resultRows.forEach(item => {
+    r++;
+    row = ws.getRow(r);
+    row.getCell(1).value = item[0];
+    row.getCell(2).value = item[1];
+    setStyle(row, 1, 1, labelFill, labelFont, leftAlign);
+    setStyle(row, 2, 2, null, null, mode === 'standard' ? leftAlign : centerAlign);
+    row.height = item[0] === '计算说明' ? Math.max(24, Math.ceil((item[1] || '').length / 50) * 20) : 24;
+  });
+
+  /* ── 列宽 ── */
+  ws.getColumn(1).width = 20;
+  ws.getColumn(2).width = 60;
+
+  const now = new Date();
+  const ds = now.getFullYear() + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0');
+  const buffer = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '新风选型_' + ds + '.xlsx';
   a.click();
   URL.revokeObjectURL(url);
 }

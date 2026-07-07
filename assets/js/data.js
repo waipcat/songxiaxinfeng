@@ -46,6 +46,19 @@ const products = [
     manual: "assets/docs/说明书-ZM2C-全热-ZM2C-迷你全热.pdf"
   },
   {
+    id: "zy1c",
+    name: "ZY系列",
+    model: "ZY1C",
+    type: "吊顶式",
+    exchange: "全热交换",
+    tags: ["经济高效", "PM2.5净化"],
+    highlight: "经济高效的全热交换器，配备PM2.5过滤网。",
+    category: "全热新风",
+    image: "assets/images/products/ZY1C.png",
+    catalog: "assets/docs/样本-工程-全热-ZY1C-ZY全热.pdf",
+    manual: "assets/docs/说明书-零售-全热-ZY1C-小风量ZY.pdf"
+  },
+  {
     id: "zxh1c",
     name: "智爽除湿全热",
     model: "ZXH1C",
@@ -92,6 +105,7 @@ const featureSeries = [
   { id: "zjd3c", name: "智净系列", model: "ZJD3C", highlight: "分区控制·5种探头·智能控制" },
   { id: "zdp2c", name: "薄型系列", model: "ZDP2C", highlight: "消毒功能·畅销系列·智能感应" },
   { id: "zm2c", name: "迷你系列", model: "ZM2C", highlight: "小巧机身·PM2.5净化·控制器升级" },
+  { id: "zy1c", name: "ZY系列", model: "ZY1C", highlight: "经济高效·PM2.5净化" },
 ];
 
 const dehumidifySeries = [
@@ -105,55 +119,55 @@ const featureCategories = [
   {
     name: "消毒功能",
     rows: [
-      { label: "消毒功能", values: { zjd3c: true, zdp2c: true, zm2c: false } },
+      { label: "消毒功能", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
     ],
   },
   {
     name: "滤网配置",
     rows: [
-      { label: "活性炭滤网", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "初效滤网", values: { zjd3c: true, zdp2c: true, zm2c: true } },
-      { label: "抗菌PM2.5过滤网", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "PM2.5过滤网", values: { zjd3c: false, zdp2c: false, zm2c: true } },
-      { label: "加强PM2.5过滤网", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "回风初效滤网", values: { zjd3c: true, zdp2c: true, zm2c: true } },
+      { label: "活性炭滤网", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: false } },
+      { label: "初效滤网", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: false } },
+      { label: "抗菌PM2.5过滤网", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "PM2.5过滤网", values: { zjd3c: false, zdp2c: false, zm2c: true, zy1c: true } },
+      { label: "加强PM2.5过滤网", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "回风初效滤网", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: true } },
     ],
   },
   {
     name: "设备部材",
     rows: [
-      { label: "马达", values: { zjd3c: "双直流马达", zdp2c: "双直流马达", zm2c: "双直流马达" }, text: true },
-      { label: "御风箱（选配）", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "温度传感器", values: { zjd3c: true, zdp2c: false, zm2c: true } },
-      { label: "湿度传感器", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "PM2.5传感器", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "CO₂传感器", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "甲醛传感器", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "手机APP", values: { zjd3c: true, zdp2c: true, zm2c: true } },
+      { label: "马达", values: { zjd3c: "双直流马达", zdp2c: "双直流马达", zm2c: "双直流马达", zy1c: "双直流马达" }, text: true },
+      { label: "御风箱（选配）", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: false } },
+      { label: "温度传感器", values: { zjd3c: true, zdp2c: false, zm2c: true, zy1c: false } },
+      { label: "湿度传感器", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: false } },
+      { label: "PM2.5传感器", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "CO₂传感器", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: false } },
+      { label: "甲醛传感器", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: false } },
+      { label: "手机APP", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: false } },
     ],
   },
   {
     name: "运行模式",
     rows: [
-      { label: "全热交换", values: { zjd3c: true, zdp2c: true, zm2c: true } },
-      { label: "内循环", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "旁通模式", values: { zjd3c: true, zdp2c: false, zm2c: false } },
-      { label: "自动模式", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "消毒模式", values: { zjd3c: true, zdp2c: true, zm2c: false } },
-      { label: "度假模式", values: { zjd3c: true, zdp2c: true, zm2c: true } },
+      { label: "全热交换", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: true } },
+      { label: "内循环", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "旁通模式", values: { zjd3c: true, zdp2c: false, zm2c: false, zy1c: true } },
+      { label: "自动模式", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "消毒模式", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
+      { label: "度假模式", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: false } },
     ],
   },
   {
     name: "附加模式",
     rows: [
-      { label: "正压模式", values: { zjd3c: true, zdp2c: true, zm2c: true } },
-      { label: "高静压模式", values: { zjd3c: true, zdp2c: true, zm2c: false } },
+      { label: "正压模式", values: { zjd3c: true, zdp2c: true, zm2c: true, zy1c: true } },
+      { label: "高静压模式", values: { zjd3c: true, zdp2c: true, zm2c: false, zy1c: false } },
     ],
   },
   {
     name: "保修",
     rows: [
-      { label: "保修政策", values: { zjd3c: "整机3年·马达8年", zdp2c: "整机3年·马达8年", zm2c: "整机3年·马达8年" }, text: true },
+      { label: "保修政策", values: "全国联保，整机3年，马达8年", text: true, colspan: true },
     ],
   },
 ];
@@ -208,7 +222,7 @@ const dehumidifyCategories = [
   {
     name: "保修期",
     rows: [
-      { label: "保修政策", values: { zxh1c: "全国联保，整机3年，马达8年", zxc2c: "全国联保，整机3年，马达8年", nxc2c: "全国联保，整机3年，马达8年", nc1c: "全国联保，整机3年，马达8年" }, text: true },
+      { label: "保修政策", values: "全国联保，整机1年，马达8年，压缩机3年，电路板3年", text: true, colspan: true },
     ],
   },
 ];
@@ -308,6 +322,21 @@ const paramsMap = {
       { label: "噪音", values: [34, 34, 36], unit: "dB(A)" },
       { label: "重量", values: [18, 26, 33], unit: "kg" },
       { label: "设备尺寸", values: ["505×550×220", "560×660×220", "735×705×230"], unit: "mm" },
+    ],
+  },
+  zy1c: {
+    series: "ZY系列",
+    models: ["FY-15ZY1C", "FY-25ZY1C", "FY-35ZY1C", "FY-50ZY1C"],
+    specs: [
+      { label: "适用面积", values: ["50-70", "70-120", "120-180", "180-250"], unit: "m²" },
+      { label: "设备风量", values: [150, 250, 350, 500], unit: "m³/h" },
+      { label: "机外余压", values: [100, 120, 140, 130], unit: "Pa" },
+      { label: "额定功率", values: [76, 106, 141, 180], unit: "W" },
+      { label: "全热交换效率（制冷）", values: ["59%", "59%", "61%", "59%"] },
+      { label: "全热交换效率（制热）", values: ["69%", "69%", "75%", "68%"] },
+      { label: "噪音", values: [37, 38, 39, 43], unit: "dB(A)" },
+      { label: "重量", values: [23, 27, 37, 40], unit: "kg" },
+      { label: "设备尺寸", values: ["860×610×289", "860×735×289", "968×874×331", "968×1016×331"], unit: "mm" },
     ],
   },
   zjt2c: {
