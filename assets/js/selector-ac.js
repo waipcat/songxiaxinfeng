@@ -13,7 +13,8 @@ function updateAcTable() {
     const name = row.querySelector('.ac-r-name')?.value || '';
     const floor = row.querySelector('.ac-r-floor')?.value || '';
     const area = parseFloat(row.querySelector('.ac-r-area')?.value || '0');
-    const load = parseFloat(row.querySelector('.ac-r-load')?.value || '220');
+    const loadVal = row.querySelector('.ac-r-load')?.value;
+    const load = loadVal !== undefined && loadVal !== '' ? parseFloat(loadVal) : 220;
     const series = row.querySelector('.ac-r-series')?.value || document.querySelector('#acIndoorSeries')?.value || '暗藏管道式_超薄_100×nanoe';
     const modelSelect = row.querySelector('.ac-r-model-select');
     const model = modelSelect?.value || '';
@@ -70,9 +71,18 @@ function updateAcTable() {
         modelSource: isAuto ? 'auto' : 'user',
         countSource: isAutoCount ? 'auto' : 'user'
       });
-  });
-  
-  const sysGroups = {};
+});
+
+	  // 冷量为0的房间排到最下方
+	  roomData.sort(function(a, b) {
+	    var aZero = !a.area || a.requiredCooling <= 0;
+	    var bZero = !b.area || b.requiredCooling <= 0;
+	    if (aZero && !bZero) return 1;
+	    if (!aZero && bZero) return -1;
+	    return 0;
+	  });
+
+	  const sysGroups = {};
   roomData.forEach(r => {
     if (!sysGroups[r.sysid]) sysGroups[r.sysid] = [];
     sysGroups[r.sysid].push(r);
@@ -518,10 +528,13 @@ function initAcSelector() {
     });
   }
   
+addRoom('', '', '', 220, defaultIndoorSeries, 1, 1);
   addRoom('', '', '', 220, defaultIndoorSeries, 1, 1);
   addRoom('', '', '', 220, defaultIndoorSeries, 1, 1);
-  addRoom('', '', '', 220, defaultIndoorSeries, 1, 1);
-  
+
+  /* ── 启用 Excel 批量粘贴 ── */
+  enableTablePaste(tableBody, function () { addRoom(); });
+
   updateAcTable();
 }
 

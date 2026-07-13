@@ -73,6 +73,10 @@
         <div class="selx-heading">
           <h2>新风选型工具</h2>
           <div class="selx-export-btns">
+            <button class="selx-export-btn" data-import-xlsx="fresh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              导入原方案
+            </button>
             <button class="selx-export-btn selx-export-xlsx" data-export-xlsx="fresh">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               导出Excel
@@ -292,6 +296,10 @@
           <h2>6恒2代选型</h2>
           <p>6恒气候站2代系统选型工具</p>
           <div class="selx-export-btns">
+            <button class="selx-export-btn" data-import-xlsx="gen2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              导入原方案
+            </button>
             <button class="selx-export-btn selx-export-xlsx" data-export-xlsx="gen2">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               导出Excel
@@ -411,6 +419,7 @@
               <tbody id="gen2AcRoomTableBody"></tbody>
               <tfoot id="gen2AcTableFoot"></tfoot>
             </table>
+            <button type="button" class="button secondary room-add" id="gen2AcAddRoomBtn" style="display:none">+ 添加房间</button>
             </div>
         </div>
 
@@ -476,6 +485,10 @@
           <h2>6恒智选选型</h2>
           <p>6恒气候站智选系统选型工具</p>
           <div class="selx-export-btns">
+            <button class="selx-export-btn" data-import-xlsx="smart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              导入原方案
+            </button>
             <button class="selx-export-btn selx-export-xlsx" data-export-xlsx="smart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               导出Excel
@@ -598,6 +611,7 @@
               <tbody id="sixAcRoomTableBody"></tbody>
               <tfoot id="sixAcTableFoot"></tfoot>
             </table>
+            <button type="button" class="button secondary room-add" id="sixAcAddRoomBtn" style="display:none">+ 添加房间</button>
           </div>
         </div>
 
@@ -665,8 +679,7 @@
       </article>
     </div>
 
-    <footer class="footer"><span>选型工具</span></footer>
-    <script src="assets/js/data.js"></script>
+        <script src="assets/js/data.js"></script>
     <script src="assets/js/common.js"></script>
     <script src="assets/js/products.js"></script>
     <script src="assets/js/selector-fresh.js"></script>

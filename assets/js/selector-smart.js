@@ -40,6 +40,7 @@ function initSixFresh() {
   function rebuildSystems() {
     const rows = body.querySelectorAll('tr:not(.sf-system-row)');
     const rooms = [];
+    const zeroAirflowRows = []; // 风量为0的行，不参与系统分组
     rows.forEach(row => {
       const floor = row.querySelector('.sf-floor')?.value || '1';
       const sysid = parseInt(row.querySelector('.sf-sysid')?.value || '1', 10);
@@ -48,6 +49,10 @@ function initSixFresh() {
       const height = Number(row.querySelector('.sf-height')?.value || 2.7);
       const ach = Number(row.querySelector('.sf-ach')?.value || 1.0);
       const qAch = Math.ceil((area * height * ach) / 10) * 10;
+      if (qAch <= 0) {
+        zeroAirflowRows.push(row);
+        return;
+      }
       rooms.push({ floor, sysid, name, area, height, ach, qAch, _row: row });
     });
 
@@ -87,6 +92,9 @@ function initSixFresh() {
     systems.forEach(sys => {
       sys.rooms.forEach(r => body.appendChild(r._row));
     });
+
+    // 风量为0的行排到最下方
+    zeroAirflowRows.forEach(function (r) { body.appendChild(r); });
 
     // 合并设计总风量单元格：首格 rowspan，删除其余被吸收的单元
     systems.forEach(sys => {
@@ -355,6 +363,9 @@ function initSixFresh() {
 
   addBtn.addEventListener('click', () => addRoom({ sysid: 1 }));
 
+  /* ── 启用 Excel 批量粘贴 ── */
+  enableTablePaste(body, function () { addRoom({ sysid: 1 }); });
+
   // 楼层解析：B1 / -1 / 地下1层 / 负1层 → { isBasement: true, level: 1 }
   function parseFloor(floorStr) {
     const s = (floorStr || '').trim().toLowerCase();
@@ -543,7 +554,8 @@ function initSixAc() {
       const name = row.querySelector('.ac-r-name')?.value || '';
       const floor = row.querySelector('.ac-r-floor')?.value || '';
       const area = parseFloat(row.querySelector('.ac-r-area')?.value || '0');
-      const load = parseFloat(row.querySelector('.ac-r-load')?.value || '220');
+      const loadVal = row.querySelector('.ac-r-load')?.value;
+      const load = loadVal !== undefined && loadVal !== '' ? parseFloat(loadVal) : 220;
       const series = row.querySelector('.ac-r-series')?.value || defaultIndoorSeries;
       const modelSelect = row.querySelector('.ac-r-model-select');
       const model = modelSelect?.value || '';
@@ -589,10 +601,19 @@ function initSixAc() {
           modelSource, countSource
         });
       }
-    });
+});
 
-    const sysGroups = {};
-    roomData.forEach(r => {
+	    // 冷量为0的房间排到最下方
+	    roomData.sort(function(a, b) {
+	      var aZero = !a.area || a.requiredCooling <= 0;
+	      var bZero = !b.area || b.requiredCooling <= 0;
+	      if (aZero && !bZero) return 1;
+	      if (!aZero && bZero) return -1;
+	      return 0;
+	    });
+
+	    const sysGroups = {};
+	    roomData.forEach(r => {
       if (!sysGroups[r.sysid]) sysGroups[r.sysid] = [];
       sysGroups[r.sysid].push(r);
     });
@@ -1094,6 +1115,9 @@ function initSixFloorHeat() {
       updateSixSummary();
     }
   });
+
+  /* ── 启用 Excel 批量粘贴 ── */
+  enableTablePaste(fhBody);
 
   syncFromAc();
 

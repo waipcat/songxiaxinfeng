@@ -2314,22 +2314,55 @@ select::placeholder {
   background: rgba(96, 93, 236, 0.04);
 }
 
+.ac-room-table tr:hover input,
+.ac-room-table tr:hover select {
+  box-shadow: inset 0 -1px 0 rgba(96, 93, 236, 0.25);
+}
+
 .ac-room-table input {
-  width: 100%;
-  min-height: 32px;
-  padding: 0 8px;
+  width: calc(100% + 24px) !important;
+  height: calc(100% + 16px);
+  margin: -8px -12px;
+  padding: 0 6px;
+  font: inherit;
   font-size: 12px;
   text-align: center;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface-light);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-sizing: border-box;
+  line-height: inherit;
+  cursor: text;
 }
 
 .ac-room-table input:focus {
-  border-color: var(--primary);
   background: var(--surface);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(96, 93, 236, 0.15);
+  box-shadow: inset 0 -2px 0 var(--primary) !important;
+}
+
+.ac-room-table select {
+  width: calc(100% + 24px) !important;
+  height: calc(100% + 16px);
+  margin: -8px -12px;
+  padding: 0 4px;
+  font: inherit;
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  box-sizing: border-box;
+  line-height: inherit;
+}
+
+.ac-room-table select:focus {
+  background: var(--surface);
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--primary) !important;
 }
 
 .ac-room-table .ac-del-btn {
@@ -2411,41 +2444,55 @@ select::placeholder {
   background: rgba(96, 93, 236, 0.04);
 }
 
+.fresh-room-table tr:hover input,
+.fresh-room-table tr:hover select {
+  box-shadow: inset 0 -1px 0 rgba(96, 93, 236, 0.25);
+}
+
 .fresh-room-table input {
-  width: 100%;
-  min-height: 32px;
-  padding: 0 8px;
+  width: calc(100% + 20px) !important;
+  height: calc(100% + 16px);
+  margin: -8px -10px;
+  padding: 0 6px;
+  font: inherit;
   font-size: 12px;
   text-align: center;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface-light);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-sizing: border-box;
+  line-height: inherit;
+  cursor: text;
 }
 
 .fresh-room-table input:focus {
-  border-color: var(--primary);
   background: var(--surface);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(96, 93, 236, 0.15);
+  box-shadow: inset 0 -2px 0 var(--primary) !important;
 }
 
 .fresh-room-table select {
-  width: 100%;
-  min-height: 32px;
-  padding: 0 8px;
+  width: calc(100% + 20px) !important;
+  height: calc(100% + 16px);
+  margin: -8px -10px;
+  padding: 0 4px;
+  font: inherit;
   font-size: 12px;
   text-align: center;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface-light);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0;
+  background: transparent;
   cursor: pointer;
+  box-sizing: border-box;
+  line-height: inherit;
 }
 
 .fresh-room-table select:focus {
-  border-color: var(--primary);
   background: var(--surface);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(96, 93, 236, 0.15);
+  box-shadow: inset 0 -2px 0 var(--primary) !important;
 }
 
 .fresh-room-table .calc-cell {

@@ -547,6 +547,9 @@ function updateSelxResult() {
 
   addRoomBtn?.addEventListener("click", () => addRoom());
 
+  /* ── 启用 Excel 批量粘贴 ── */
+  enableTablePaste(roomTableBody, function () { addRoom(); });
+
   document.querySelectorAll("#selxFeatures input").forEach((cb) => cb.addEventListener("change", updateSelxResult));
   document.querySelectorAll("#simpArea, #simpHeight, #simpAreaRatio").forEach((el) => el.addEventListener("input", updateSelxResult));
   document.querySelectorAll("#selxAchs input").forEach((el) => el.addEventListener("change", updateSelxResult));
