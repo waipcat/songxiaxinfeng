@@ -161,6 +161,21 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         compareParams.classList.remove("dehumidify");
       }
+
+      // 除湿产品：在设备参数表格底部增加除湿量测试工况备注
+      const paramsTableWrap = compareParams.closest('.table-wrap');
+      let paramsNote = paramsTableWrap.querySelector('.params-note');
+      if (type === "dehumidify") {
+        if (!paramsNote) {
+          paramsNote = document.createElement('div');
+          paramsNote.className = 'params-note';
+          paramsTableWrap.appendChild(paramsNote);
+        }
+        paramsNote.innerHTML = '<p>*1. 除湿全热类设备的除湿量测试工况为：室内27℃，50%相对湿度，室外35℃，60%相对湿度。</p><p>*2. 除湿新风类设备的除湿量测试工况为：室内30℃，80%相对湿度。</p>';
+        paramsNote.style.display = '';
+      } else {
+        if (paramsNote) paramsNote.style.display = 'none';
+      }
     };
 
     renderCompareWithType(initialType);

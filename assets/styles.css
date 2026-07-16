@@ -754,6 +754,19 @@ h3 {
   margin-top: 0;
 }
 
+/* 除湿产品参数底部备注 */
+.params-note {
+  margin-top: 4px;
+  padding: 0 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.params-note p {
+  margin: 0;
+}
+
 .entry-grid,
 .product-grid {
   display: grid;

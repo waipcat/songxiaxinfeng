@@ -371,7 +371,7 @@ const paramsMap = {
     specs: [
       { label: "适用面积", values: ["50-100", "50-150"], unit: "m²" },
       { label: "设备风量", values: [250, 350], unit: "m³/h" },
-      { label: "除湿量", values: [81, 110], unit: "L/D" },
+      { label: "除湿量*", values: [81, 110], unit: "L/D" },
       { label: "机外余压", values: [110, 110], unit: "Pa" },
       { label: "额定功率", values: [1110, 1490], unit: "W" },
       { label: "全热交换效率（制冷）", values: ["66%", "62%"] },
@@ -389,7 +389,7 @@ const paramsMap = {
     specs: [
       { label: "适用面积", values: ["50-100", "50-100"], unit: "m²" },
       { label: "设备风量", values: [300, 400], unit: "m³/h" },
-      { label: "除湿量", values: [65, 77], unit: "L/D" },
+      { label: "除湿量*", values: [65, 77], unit: "L/D" },
       { label: "机外余压", values: [120, 120], unit: "Pa" },
       { label: "额定功率", values: [815, 895], unit: "W" },
       { label: "全热交换效率（制冷）", values: ["61%", "61%"] },
@@ -407,7 +407,7 @@ const paramsMap = {
     specs: [
       { label: "适用面积", values: ["50-100"], unit: "m²" },
       { label: "设备风量", values: [500], unit: "m³/h" },
-      { label: "除湿量", values: [45], unit: "L/D" },
+      { label: "除湿量*", values: [45], unit: "L/D" },
       { label: "机外余压", values: ["-"], unit: "Pa" },
       { label: "额定功率", values: [635], unit: "W" },
       { label: "全热交换效率（制冷）", values: ["-"] },
@@ -425,7 +425,7 @@ const paramsMap = {
     specs: [
       { label: "适用面积", values: ["50-100"], unit: "m²" },
       { label: "设备风量", values: [500], unit: "m³/h" },
-      { label: "除湿量", values: [45], unit: "L/D" },
+      { label: "除湿量*", values: [45], unit: "L/D" },
       { label: "机外余压", values: ["-"], unit: "Pa" },
       { label: "额定功率", values: [610], unit: "W" },
       { label: "全热交换效率（制冷）", values: ["-"] },
